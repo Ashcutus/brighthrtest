@@ -1,14 +1,14 @@
 version: 2.1
 
 executors:
-  node_executor:
+  playwright_executor:
     docker:
-      - image: cimg/node:18.20.5
+      - image: mcr.microsoft.com/playwright:v1.42.0
     working_directory: ~/repo
 
 jobs:
   test:
-    executor: node_executor
+    executor: playwright_executor
     steps:
       - checkout
       - restore_cache:
