@@ -1,0 +1,16 @@
+{
+  "name": "brighthr-tech-test",
+  "version": "1.0.0",
+  "description": "Tech test for BrightHR",
+  "main": "index.js",
+  "scripts": {},
+  "author": "Ben Ashby",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "@playwright/test": "^1.53.0",
+    "@types/node": "^24.0.1",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.5.0"
+  }
+}
