@@ -1,0 +1,39 @@
+version: 2.1
+
+executors:
+  node_executor:
+    docker:
+      - image: circleci/node:18
+    working_directory: ~/repo
+
+jobs:
+  test:
+    executor: node_executor
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run Playwright tests
+          command: npx playwright test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+
+workflows:
+  version: 2
+  test-on-push:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: main
