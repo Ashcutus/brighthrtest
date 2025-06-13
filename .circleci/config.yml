@@ -1,12 +1,39 @@
 version: 2.1
-jobs:
-  build:
+
+executors:
+  playwright_executor:
     docker:
-      - image: cimg/node:18.20.5
+      - image: mcr.microsoft.com/playwright:v1.53.0-jammy
+    working_directory: ~/repo
+
+jobs:
+  test:
+    executor: playwright_executor
     steps:
       - checkout
-      # Add your custom build steps here
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Run Playwright tests
+          command: npx playwright test
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+
 workflows:
-  build_workflow:
+  version: 2
+  test-on-push:
     jobs:
-      - build
+      - test:
+          filters:
+            branches:
+              only: main
