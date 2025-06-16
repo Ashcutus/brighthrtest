@@ -31,6 +31,7 @@ test.describe.serial('Adding Employees', () => {
 	let employeePage;
 
 	test.beforeAll(async ({ browser }) => {
+		// As the login app uses a different origin, we store the browser session data for subsequent tests
 		context = await browser.newContext({
 			storageState: path.resolve(__dirname, '../playwright/.auth/user.json'),
 		});

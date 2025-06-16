@@ -9,7 +9,7 @@ export default defineConfig({
 	forbidOnly: !!process.env.CI,
 	retries: process.env.CI ? 2 : 0,
 	workers: process.env.CI ? 1 : undefined,
-	reporter: process.env.CI ? 'dot' : 'html',
+	reporter: [['html', { open: 'never' }], ['dot']],
 	timeout: 30000,
 	expect: {
 		timeout: 30000, // Timeout for expectations as CI is slower

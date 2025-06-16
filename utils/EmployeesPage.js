@@ -7,12 +7,10 @@ class EmployeePage {
 		this.dashboardURL = `${process.env.BASE_URL}/dashboard`;
 		this.employeeHubURL = `${process.env.BASE_URL}/employee-hub`;
 
-		// Employee modal
+		// Modals
 		this.addEmployeeButton = 'button:has-text("Add employee")';
 		this.modalTitle = 'h1:has-text("Add employee")';
 		this.saveNewEmployeeButton = 'button:has-text("Save new employee")';
-
-		// Employee form fields
 		this.firstNameField = '#firstName';
 		this.lastNameField = '#lastName';
 		this.emailField = '#email';
@@ -23,8 +21,6 @@ class EmployeePage {
 			`[class="DayPicker-Body"] div[aria-label="${date}"]`;
 		this.dateSelector = '[data-testid="input-selector"] span';
 		this.jobTitleField = '#jobTitle';
-
-		// Confirmation (returns locators for use in spec assertions)
 		this.successMessage = () =>
 			this.page.locator('h1:has-text("Success! New employee added")');
 		this.employeeConfirmation = (name) =>
@@ -37,7 +33,7 @@ class EmployeePage {
 			this.page.locator(`h1:has-text("${name}")`);
 	}
 
-	// Navigation Methods
+	// Functions
 	async navigateToDashboard() {
 		await this.page.goto(this.dashboardURL);
 		await this.page.waitForURL(this.dashboardURL);
@@ -48,12 +44,10 @@ class EmployeePage {
 		await this.page.waitForURL(this.employeeHubURL);
 	}
 
-	// Employee Modal Methods
 	async openAddEmployeeModal() {
 		await this.page.locator(this.addEmployeeButton).click();
 	}
 
-	// Employee Form Methods
 	async fillEmployeeForm(
 		firstName,
 		lastName,
