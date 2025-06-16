@@ -126,8 +126,12 @@ test.describe.serial('Add a second employee', () => {
 		await employeePage.closeModalButton().click();
 
 		// Verify both employees are visible
-		await expect(employeePage.employeeProfile(firstNameOne)).toBeVisible();
-		await expect(employeePage.employeeProfile(firstNameTwo)).toBeVisible();
+		await expect(
+			employeePage.employeeProfile(`${firstNameOne} ${lastNameOne}`)
+		).toBeVisible();
+		await expect(
+			employeePage.employeeProfile(`${firstNameTwo} ${lastNameTwo}`)
+		).toBeVisible();
 	});
 
 	test.afterAll(async () => {
