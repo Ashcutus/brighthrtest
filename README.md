@@ -31,3 +31,4 @@ If you would like the interactive mode simply append `--ui` to the npx command o
 
 ### Github Actions
 This project is set to run a Githib action workflow on push or PR to `main`
+A report will be generated in the `run actions/upload-artifact@v4` step where you can download the generated report ZIP file
